@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 
 public class PressAnyKey : MonoBehaviour
 {
-    public TextMeshProUGUI pressText; // Pressione qualquer tecla para iniciar
+    public TextMeshProUGUI pressText; // "Pressione qualquer tecla para iniciar"
     public float blinkSpeed = 1f;
 
     private bool keyPressed = false;
@@ -19,8 +20,7 @@ public class PressAnyKey : MonoBehaviour
             {
                 keyPressed = true;
                 pressText.gameObject.SetActive(false);
-                Debug.Log("funcionou");
-                // aqui você pode futuramente chamar a próxima cena, ativar UI, etc
+                SceneManager.LoadScene("OptionsMenu");
             }
         }
     }
