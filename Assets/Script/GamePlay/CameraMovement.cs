@@ -11,7 +11,7 @@ public class CameraFollow : MonoBehaviour
         transform.position = new Vector3(
             bola.position.x + offset.x,
             bola.position.y + offset.y,
-            bola.position.z + offset.z
+            bola.position.z + offset.z +4.304f // ajuste a posição Z da câmera
         );
 
         // Garante que a câmera olhe sempre para a bola
