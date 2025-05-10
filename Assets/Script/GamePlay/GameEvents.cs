@@ -74,6 +74,9 @@ public class GameEventsManager : MonoBehaviour
         Debug.Log("Chamando ResetGamePositions para a bola sair pela lateral.");
         if (initialPositions != null)
         {
+            ball.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+            ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
             initialPositions.ResetGamePositions(Team1, Team2, ball);  // Passando as listas corretas
             Debug.Log("Posições de jogo resetadas.");
         }
@@ -88,6 +91,9 @@ public class GameEventsManager : MonoBehaviour
         Debug.Log("Chamando ResetGamePositions para o gol.");
         if (initialPositions != null)
         {
+            ball.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+            ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            
             initialPositions.ResetGamePositions(Team1, Team2, ball);  // Passando as listas corretas
             Debug.Log("Posições de jogo resetadas após o gol.");
         }
@@ -108,7 +114,5 @@ public class GameEventsManager : MonoBehaviour
         Debug.Log($"Atualizando placar: {scoreTeam1} - {scoreTeam2}");
         scoreBoard2.text = $"{scoreTeam2}";
     }
-
-
 
 }
