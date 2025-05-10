@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class PlayersManagement : MonoBehaviour
 {
     private Vector3 inicialBallPosition = new Vector3(-0.1887279f, 0.251f, -4.304f);
@@ -23,6 +21,7 @@ public class PlayersManagement : MonoBehaviour
     public float playerIndicatorDistance;
 
     public float moveSpeed;
+    public float goalkeeperSpeed;
 
 
 
@@ -87,6 +86,9 @@ public class PlayersManagement : MonoBehaviour
 
         CheckBallPossession();
         UpdateBallPosition();
+
+        MovePlayersTowardBall();
+        MoveGoalkeepers();
     }
 
     void Player1Movement(Vector3 direction)
@@ -321,9 +323,54 @@ public class PlayersManagement : MonoBehaviour
         }
     }
 
+    void MovePlayersTowardBall()
+{
+    float followSpeed = moveSpeed * 0.5f;
 
+    foreach (GameObject player in Team1)
+    {
+        if (player == player1Character || player.CompareTag("Goleiro")) continue;
 
+        Vector3 direction = (ball.transform.position - player.transform.position);
+        direction.y = 0;
+        if (direction.magnitude > 0.1f)
+        {
+            direction.Normalize();
+            player.transform.position += direction * followSpeed * Time.deltaTime;
+        }
+    }
 
+    foreach (GameObject player in Team2)
+    {
+        if (player == player2Character || player.CompareTag("Goleiro")) continue;
+
+        Vector3 direction = (ball.transform.position - player.transform.position);
+        direction.y = 0;
+        if (direction.magnitude > 0.1f)
+        {
+            direction.Normalize();
+            player.transform.position += direction * followSpeed * Time.deltaTime;
+        }
+    }
+}
+
+    void MoveGoalkeepers()
+    {
+        GameObject[] goalkeepers = GameObject.FindGameObjectsWithTag("Goleiro");
+
+        foreach (GameObject goalkeeper in goalkeepers)
+        {
+            Vector3 direction = ball.transform.position - goalkeeper.transform.position;
+            direction.x = 0; // impede movimento lateral
+            direction.y = 0; // impede variação vertical
+
+            if (direction.sqrMagnitude > 0.01f)
+            {
+                direction.Normalize();
+                goalkeeper.transform.position += direction * goalkeeperSpeed * Time.deltaTime;
+            }
+        }
+    }
 
 
 }

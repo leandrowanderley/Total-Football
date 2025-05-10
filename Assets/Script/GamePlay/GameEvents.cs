@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class GameEventsManager : MonoBehaviour
 {
+
     public GameObject ball;
     public TMP_Text scoreBoard1;
     public TMP_Text scoreBoard2;
@@ -48,6 +49,7 @@ public class GameEventsManager : MonoBehaviour
             {
                 Debug.Log("Gol na equipe 2!");
                 scoreTeam2++;
+                PlayGoalSound();
                 UpdateScoreboard2();
                 HandleGoal();
             }
@@ -55,6 +57,7 @@ public class GameEventsManager : MonoBehaviour
             {
                 Debug.Log("Gol na equipe 1!");
                 scoreTeam1++;
+                PlayGoalSound();
                 UpdateScoreboard1();
                 HandleGoal();
             }
@@ -113,6 +116,22 @@ public class GameEventsManager : MonoBehaviour
     {
         Debug.Log($"Atualizando placar: {scoreTeam1} - {scoreTeam2}");
         scoreBoard2.text = $"{scoreTeam2}";
+    }
+
+    public AudioSource goalSound;
+
+    public void PlayGoalSound()
+    {
+        if (goalSound != null)
+        {
+            goalSound.Stop(); // Garante que o som reinicie mesmo se estiver tocando
+            goalSound.Play();
+            Debug.Log("Som do gol tocado.");
+        }
+        else
+        {
+            Debug.LogError("goalSound é null.");
+        }
     }
 
 }

@@ -9,6 +9,7 @@ TagManager:
   - TouchLine
   - Gol1
   - Gol2
+  - Goleiro
   layers:
   - Default
   - TransparentFX
