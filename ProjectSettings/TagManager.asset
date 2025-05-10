@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 3
   tags:
   - Coin
+  - Ball
+  - TouchLine
+  - Gol1
+  - Gol2
   layers:
   - Default
   - TransparentFX

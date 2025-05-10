@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class PlayersManagement : MonoBehaviour
 {
-
-    //   Assets/Images/PlayerIndicator/Player1Indicator.png // Player atual do Jogador 1
-    //   Assets/Images/PlayerIndicator/Player1Indicator2.png // Player mais próximo do player atual do Jogador 1
-    //   Assets/Images/PlayerIndicator/Player2Indicator.png // Player atual do Jogador 2
-    //   Assets/Images/PlayerIndicator/Player2Indicator2.png // Player mais próximo do player atual do Jogador 2
+    private Vector3 inicialBallPosition = new Vector3(-0.1887279f, 0.251f, -4.304f);
 
     public GameObject player1Indicator;
     public GameObject player2Indicator;
@@ -39,6 +37,7 @@ public class PlayersManagement : MonoBehaviour
 
     void Start()
     {
+
         for (int i = 0; i < playersFather.transform.childCount; i++)
         {
             GameObject player = playersFather.transform.GetChild(i).gameObject;
@@ -49,6 +48,8 @@ public class PlayersManagement : MonoBehaviour
 
         if (Team1.Count == 0) Team1.Add(Instantiate(player1Character, playersFather.transform));
         if (Team2.Count == 0) Team2.Add(Instantiate(player2Character, playersFather.transform));
+
+        // setPlayersAndBallInitialPosition();
 
         ballRb = ball.GetComponent<Rigidbody>();
     }
@@ -296,7 +297,6 @@ public class PlayersManagement : MonoBehaviour
         }
     }
 
-
     void PassBall(GameObject player)
     {
         if (currentBallHolder == player)
@@ -320,6 +320,10 @@ public class PlayersManagement : MonoBehaviour
             ballRb.linearVelocity = direction * shootForce;
         }
     }
+
+
+
+
 
 
 }
