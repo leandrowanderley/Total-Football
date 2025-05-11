@@ -184,6 +184,7 @@ public class PlayersManagement : MonoBehaviour
 
         foreach (GameObject teammate in Team1)
         {
+            if (teammate.tag == "Goleiro") continue;
             if (teammate == player1Character) continue;
 
             float dist = Vector3.Distance(player1Character.transform.position, teammate.transform.position);
@@ -230,6 +231,7 @@ public class PlayersManagement : MonoBehaviour
 
         foreach (GameObject teammate in Team1)
         {
+            if (teammate.tag == "Goleiro") continue;
             if (teammate == player1Character) continue;
 
             float dist = Vector3.Distance(player1Character.transform.position, teammate.transform.position);
@@ -253,6 +255,7 @@ public class PlayersManagement : MonoBehaviour
 
         foreach (GameObject teammate in Team2)
         {
+            if (teammate.tag == "Goleiro") continue;
             if (teammate == player2Character) continue;
 
             float dist = Vector3.Distance(player2Character.transform.position, teammate.transform.position);

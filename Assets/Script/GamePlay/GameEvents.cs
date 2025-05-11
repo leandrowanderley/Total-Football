@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using System.Collections;
+
 
 public class GameEventsManager : MonoBehaviour
 {
@@ -127,11 +129,28 @@ public class GameEventsManager : MonoBehaviour
             goalSound.Stop(); // Garante que o som reinicie mesmo se estiver tocando
             goalSound.Play();
             Debug.Log("Som do gol tocado.");
+
+            if (audioManager != null)
+            {
+                StartCoroutine(ReduceBackgroundVolumeTemporarily());
+            }
         }
         else
         {
             Debug.LogError("goalSound é null.");
         }
+    }
+
+    public AudioManager audioManager;
+
+    private IEnumerator ReduceBackgroundVolumeTemporarily()
+    {
+        float originalVolume = audioManager.audioSource.volume;
+        audioManager.audioSource.volume = originalVolume * 0.3f; // Diminui para 30%
+
+        yield return new WaitForSeconds(goalSound.clip.length);
+
+        audioManager.audioSource.volume = originalVolume;
     }
 
 }
