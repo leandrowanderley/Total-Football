@@ -51,6 +51,7 @@ public class PlayersManagement : MonoBehaviour
         // setPlayersAndBallInitialPosition();
 
         ballRb = ball.GetComponent<Rigidbody>();
+        ballRb.isKinematic = false;
     }
 
     void Update()
@@ -297,8 +298,13 @@ public class PlayersManagement : MonoBehaviour
     {
         if (currentBallHolder != null)
         {
+            ballRb.isKinematic = true;
             ball.transform.position = currentBallHolder.transform.position + currentBallHolder.transform.rotation * ballOffset;
             ball.transform.rotation = currentBallHolder.transform.rotation;
+        }
+        else
+        {
+            ballRb.isKinematic = false;
         }
     }
 
@@ -307,10 +313,12 @@ public class PlayersManagement : MonoBehaviour
         if (currentBallHolder == player)
         {
             currentBallHolder = null;
-            ballRb.isKinematic = false;
 
             Vector3 direction = player.transform.forward;
-            ballRb.linearVelocity = direction * passForce;
+            ballRb.isKinematic = false; // Garante que está na física
+            ballRb.linearVelocity = Vector3.zero;
+            ballRb.angularVelocity = Vector3.zero;
+            ballRb.AddForce(direction * passForce, ForceMode.Impulse);
         }
     }
 
@@ -319,10 +327,12 @@ public class PlayersManagement : MonoBehaviour
         if (currentBallHolder == player)
         {
             currentBallHolder = null;
-            ballRb.isKinematic = false;
 
             Vector3 direction = player.transform.forward;
-            ballRb.linearVelocity = direction * shootForce;
+            ballRb.isKinematic = false; // Garante que está na física
+            ballRb.linearVelocity = Vector3.zero;
+            ballRb.angularVelocity = Vector3.zero;
+            ballRb.AddForce(direction * shootForce, ForceMode.Impulse);
         }
     }
 
