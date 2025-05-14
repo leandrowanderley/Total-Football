@@ -36,7 +36,6 @@ public class PlayersManagement : MonoBehaviour
 
     void Start()
     {
-
         for (int i = 0; i < playersFather.transform.childCount; i++)
         {
             GameObject player = playersFather.transform.GetChild(i).gameObject;
@@ -47,8 +46,6 @@ public class PlayersManagement : MonoBehaviour
 
         if (Team1.Count == 0) Team1.Add(Instantiate(player1Character, playersFather.transform));
         if (Team2.Count == 0) Team2.Add(Instantiate(player2Character, playersFather.transform));
-
-        // setPlayersAndBallInitialPosition();
 
         ballRb = ball.GetComponent<Rigidbody>();
         ballRb.isKinematic = false;
@@ -337,35 +334,35 @@ public class PlayersManagement : MonoBehaviour
     }
 
     void MovePlayersTowardBall()
-{
-    float followSpeed = moveSpeed * 0.5f;
-
-    foreach (GameObject player in Team1)
     {
-        if (player == player1Character || player.CompareTag("Goleiro")) continue;
+        float followSpeed = moveSpeed * 0.5f;
 
-        Vector3 direction = (ball.transform.position - player.transform.position);
-        direction.y = 0;
-        if (direction.magnitude > 0.1f)
+        foreach (GameObject player in Team1)
         {
-            direction.Normalize();
-            player.transform.position += direction * followSpeed * Time.deltaTime;
+            if (player == player1Character || player.CompareTag("Goleiro")) continue;
+
+            Vector3 direction = (ball.transform.position - player.transform.position);
+            direction.y = 0;
+            if (direction.magnitude > 0.1f)
+            {
+                direction.Normalize();
+                player.transform.position += direction * followSpeed * Time.deltaTime;
+            }
+        }
+
+        foreach (GameObject player in Team2)
+        {
+            if (player == player2Character || player.CompareTag("Goleiro")) continue;
+
+            Vector3 direction = (ball.transform.position - player.transform.position);
+            direction.y = 0;
+            if (direction.magnitude > 0.1f)
+            {
+                direction.Normalize();
+                player.transform.position += direction * followSpeed * Time.deltaTime;
+            }
         }
     }
-
-    foreach (GameObject player in Team2)
-    {
-        if (player == player2Character || player.CompareTag("Goleiro")) continue;
-
-        Vector3 direction = (ball.transform.position - player.transform.position);
-        direction.y = 0;
-        if (direction.magnitude > 0.1f)
-        {
-            direction.Normalize();
-            player.transform.position += direction * followSpeed * Time.deltaTime;
-        }
-    }
-}
 
     void MoveGoalkeepers()
     {
@@ -384,6 +381,5 @@ public class PlayersManagement : MonoBehaviour
             }
         }
     }
-
 
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform bola;      // arraste a bola aqui pelo Inspector
-    public Vector3 offset;      // offset da câmera em relação à bola
+    public Vector3 offset;   // offset da câmera em relação à bola
 
     void LateUpdate()
     {
